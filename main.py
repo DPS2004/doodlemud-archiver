@@ -9,6 +9,7 @@ delay = 2
 world = 1
 start_radius = 1
 max_radius = 3
+screenshots = 0
 
 def xytonwse(x,y):
     ew = ""
@@ -24,11 +25,13 @@ def xytonwse(x,y):
     return(ew+ns)
 
 def screenshot(x,y):
+    global screenshots
     p = xytonwse(x,y)
     if p != "":
         p = "_"+p
     webbrowser.open('https://www.doodlemud.com/' + "#w" + str(world)+p)
-    pyautogui.moveTo(1560,205,1)
+    pyautogui.moveTo(1560,205+(screenshots%2)*2,1)
+    screenshots += 1
     pyautogui.click() 
     time.sleep(delay)
     pyautogui.screenshot("w"+str(world)+"/"+str(x)+"_"+str(y)+".png",region = screenshot_pos)
